@@ -11,6 +11,12 @@
 if (! class_exists("ViewManager") ){
 
 	class ViewManager {
+		
+		protected $base_view_dir = "";
+		
+		public function __construct( $base_view_dir = ""){
+			$this->base_view_dir = $base_view_dir == "" ? plugin_dir_path(__FILE__) : $base_view_dir ;
+		}
 
 		/**
 		*
@@ -18,11 +24,12 @@ if (! class_exists("ViewManager") ){
 		*
 		* @param $filePath - include path to the template.
 		* @param null $viewData - any data to be used within the template.
+		*
 		* @return string - The template to be rendered.
 		*
 		*/
-		public function partialRender( $filePath, $viewData = null, $from_views_dir = true ) {
-			$filePath = $from_views_dir ? plugin_dir_path(__FILE__) . $filePath : $filePath;
+		public function partialRender( $filePath, $viewData = null ) {
+			$filePath = $this->base_view_dir . $filePath;
 			( $viewData ) ? extract( $viewData ) : null;
 			ob_start();
 			require ( $filePath );
@@ -40,7 +47,7 @@ if (! class_exists("ViewManager") ){
 		*
 		*/
 		public function render( $filePath, $viewData = null, $from_views_dir = true ) {
-			$filePath = $from_views_dir ? plugin_dir_path(__FILE__) . $filePath : $filePath;
+			$filePath = $this->base_view_dir . $filePath;
 			( $viewData ) ? extract( $viewData ) : null;
 			include ( $filePath );
 		}

@@ -266,7 +266,7 @@ class WPMUSignupSteps{
 	 * @since    1.0.1
 	 */
 	public function action_render_steps_markup() {
-		$viewMan = new ViewManager();
+		$viewMan = new ViewManager( plugin_dir_path(__FILE__) . "views/" );
 
 		$last_stage = isset($_POST["stage"]) ? $_POST["stage"] : "default" ;
 		$user_logged_in = is_user_logged_in();
