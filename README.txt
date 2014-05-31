@@ -1,4 +1,4 @@
-=== wpmu-signup-steps ===
+=== WPMU Signup Steps ===
 Contributors: jossemarGT
 Donate link: http://jossemargt.com
 Tags: comments, spam
