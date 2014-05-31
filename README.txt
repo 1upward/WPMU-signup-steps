@@ -1,34 +1,40 @@
 === wpmu-signup-steps ===
-Contributors: jossemargt
+Contributors: jossemarGT
 Donate link: http://jossemargt.com
 Tags: comments, spam
 Requires at least: 3.5.1
-Tested up to: 3.6
-Stable tag: 1.0.0
+Tested up to: 3.9.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Make the signup process explicit and simple.
+Make the wordpress multisite signup process explicit and simple, with a visual help.
 
 == Description ==
 
-Make the signup process explicit and simple. (Longer description here)
+Make the wordpress multisite signup process explicit and simple, with a visual help.
 
 == Installation ==
 
-1. Upload `` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the "Plugins" menu in WordPress
-1. Place `<?php do_action("wpmu-signup-steps_hook"); ?>` in your templates
+1. Upload `wpmu-signup-steps` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the "Plugins" menu in WordPress
+3. Enjoy
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Simple visual guide for the signup process.
+2. Also listens to the error validation of wp-signup.
 
 == Changelog ==
 
+= 1.0.2 =
+* Stable version
+* Spanish translation
+* i18 support
+
+= 1.0.1 =
+* Basic styling and behavior
+
 = 1.0 =
 * Initial Commit
+* `$ yo wordpress-plugin`

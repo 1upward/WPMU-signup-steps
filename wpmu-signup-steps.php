@@ -1,20 +1,20 @@
 <?php
 /**
- * wpmu-signup-steps
+ * WPMU Signup Steps
  *
- * Make the signup process explicit and simple.
+ * Make the wordpress multisite signup process explicit and simple, with a visual help.
  *
  * @package   wpmu-signup-steps
- * @author    jossemarGT <hello@jossemargt.com>
+ * @author    jossemarGT <hello [at] jossemargt [dot] com>
  * @license   GPL-2.0+
  * @link      http://jossemargt.com
  * @copyright 5-29-2014 jossemargt
  *
  * @wordpress-plugin
  * Plugin Name: wpmu-signup-steps
- * Plugin URI:  http://jossemargt.com
- * Description: Make the signup process explicit and simple.
- * Version:     1.0.0
+ * Plugin URI:  https://github.com/jossemarGT/WPMU-signup-steps
+ * Description: Make the wordpress multisite signup process explicit and simple, with a visual help.
+ * Version:     1.0.2
  * Author:      jossemarGT
  * Author URI:  http://jossemargt.com
  * Text Domain: wpmu-signup-steps-locale

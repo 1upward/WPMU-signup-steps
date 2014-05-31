@@ -3,10 +3,10 @@
  * Static class with utils functions for a better template management and bring a DRY code.
  *
  * @package   wpmu-signup-steps
- * @author    jossemarGT <hello@jossemargt.com>
+ * @author    jossemarGT <hello [at] jossemargt [dot] com>
  * @license   GPL-2.0+
  * @link      http://jossemargt.com
- * @copyright 5-29-2014 jossemargt
+ * @copyright 5-29-2014 jossemarGT
  */
 if (! class_exists("ViewManager") ){
 

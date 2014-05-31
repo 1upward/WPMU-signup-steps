@@ -3,10 +3,10 @@
  * wpmu-signup-steps
  *
  * @package   wpmu-signup-steps
- * @author    jossemarGT <hello@jossemargt.com>
+ * @author    jossemarGT <hello [at] jossemargt [dot] com>
  * @license   GPL-2.0+
  * @link      http://jossemargt.com
- * @copyright 5-29-2014 jossemargt
+ * @copyright 5-29-2014 jossemarGT
  */
 
 require_once(plugin_dir_path(__FILE__) . "/views/ViewManager.php");
@@ -15,7 +15,7 @@ require_once(plugin_dir_path(__FILE__) . "/views/ViewManager.php");
  * wpmu-signup-steps class.
  *
  * @package WPMUSignupSteps
- * @author  jossemarGT <hello@jossemargt.com>
+ * @author  jossemarGT <hello [at] jossemargt [dot] com>
  */
 class WPMUSignupSteps{
 	/**
@@ -122,7 +122,7 @@ class WPMUSignupSteps{
 		// "default" before any registration (server side)
 		
 		// After any signup (new user, new blog, another blog) form and before wp_footer
-		add_action("after_signup_form", array($this, "action_append_after_forms"));
+		add_action("after_signup_form", array($this, "action_append_steps_fixes"));
 		
 		// add_filter("TODO", array($this, "filter_method_name"));
 
@@ -232,7 +232,7 @@ class WPMUSignupSteps{
 		wp_enqueue_style($this->plugin_slug . "-plugin-styles", plugins_url("css/public.css", __FILE__), array(),
 			$this->version);
 		
-		wp_enqueue_script($this->plugin_slug . "-plugin-script", plugins_url("js/public.js", __FILE__), array("jquery"),
+		wp_enqueue_script($this->plugin_slug . "-plugin-script", plugins_url("js/wpmu-signup-steps.js", __FILE__), array("jquery"),
 			$this->version);
 	}
 
@@ -279,7 +279,7 @@ class WPMUSignupSteps{
 			"has_blog_signup_errors" => $this->blog_signup_has_errors,
 			"active_signup_type" => $active_signup,
 			"user_logged_in" => $user_logged_in,
-			"locale_slug" => $this->plugin-slug,
+			"locale_slug" => $this->plugin_slug,
 			"last_stage" => $last_stage
 		));
 	}
@@ -306,10 +306,20 @@ class WPMUSignupSteps{
 		$this->blog_signup_has_errors = is_wp_error($errors) && sizeof($errors->errors) > 0;
 	}
 	
-	public function action_append_after_forms() {
-		echo $this->user_signup_has_errors ? "With user signup errors": "";
+	/**
+	 * Append JS Object at the end of the form if exists some error and fix the current step
+	 * 
+	 * @since			1.0.2
+	 */
 		
-		echo $this->blog_signup_has_errors ? "With blog signup errors": "";
+	public function action_append_steps_fixes() {
+		wp_localize_script( $this->plugin_slug . "-plugin-script",
+											 "steps_fixes",
+											 array(
+												 "user_signup_has_errors" => $this->user_signup_has_errors ? 1 : 0,
+												 "blog_signup_has_errors" => $this->blog_signup_has_errors ? 1 : 0
+											 )
+											);
 	}
 	
 	public function action_add_fields_user_signup_form() {

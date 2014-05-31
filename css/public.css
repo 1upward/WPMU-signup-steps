@@ -1,3 +1,11 @@
+/**
+ * @package   wpmu-signup-steps
+ * @author    jossemarGT <hello [at] jossemargt [dot] com>
+ * @license   GPL-2.0+
+ * @link      http://jossemargt.com
+ * @copyright 5-29-2014 jossemarGT
+ */
+
 #wp-signup-steps {
 	margin: 0 auto 10px;
 	width: 90%; /* The same width as div.mu_register */ 
@@ -11,14 +19,18 @@
 	margin-right: 20px;
 	background-color: #B5DEE2;
 	color: #FFF;
-	-webkit-transition: all 0.7s ease-in-out 1.5s;
-		 -moz-transition: all 0.7s ease-in-out 1.5s;
-			-ms-transition: all 0.7s ease-in-out 1.5s;
-					transition: all 0.7s ease-in-out 1.5s;
+	-webkit-transition: background-color 0.7s ease-in-out 0.5s;
+		 -moz-transition: background-color 0.7s ease-in-out 0.5s;
+			-ms-transition: background-color 0.7s ease-in-out 0.5s;
+					transition: background-color 0.7s ease-in-out 0.5s;
 }
 
 #wp-signup-steps .step.active {
 	background-color: #7EBFC5;
+}
+
+#wp-signup-steps .step.error {
+	background-color: #A63A35;
 }
 
 #wp-signup-steps .step:nth-child(1) {
@@ -38,6 +50,10 @@
 	height: 0;
 	top: 0;
 	bottom: 0;
+	-webkit-transition: border-color 0.7s ease-in-out 0.5s;
+		 -moz-transition: border-color 0.7s ease-in-out 0.5s;
+			-ms-transition: border-color 0.7s ease-in-out 0.5s;
+					transition: border-color 0.7s ease-in-out 0.5s;
 }
 
 #wp-signup-steps .step:before {
@@ -61,4 +77,8 @@
 
 #wp-signup-steps .step.active:after {
 	border-left: 15px solid #7EBFC5;
+}
+
+#wp-signup-steps .step.error:after {
+	border-left: 15px solid #A63A35;
 }

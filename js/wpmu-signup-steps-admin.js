@@ -5,7 +5,7 @@
  * The User Interface to the end administrator.
  *
  * @package   wpmu-signup-steps
- * @author    jossemarGT <hello@jossemargt.com>
+ * @author    jossemarGT <hello [at] jossemargt [dot] com>
  * @license   GPL-2.0+
  * @link      http://jossemargt.com
  * @copyright 5-29-2014 jossemargt
