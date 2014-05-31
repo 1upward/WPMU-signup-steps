@@ -24,18 +24,20 @@ if("default" == $last_stage){
 <div id="wp-signup-steps">
 	<ol>
 <?php if ("get_another_site" == $step || "gimmeanotherblog" == $step): ?>
-		<li class="step <?php echo "get_another_site" == $step ? "active" : ""; ?>">Get another site</li>
-		<li class="step <?php echo "gimmeanotherblog" == $step ? "active" : ""; ?>">Enjoy</li>
+		<li class="step <?php echo "get_another_site" == $step ? "active" : ""; ?>"><?php _e("Get another site", $locale_slug); ?></li>
+		<li class="step <?php echo "gimmeanotherblog" == $step ? "active" : ""; ?>"><?php _e("Enjoy", $locale_slug); ?></li>
 <?php else: ?>
-		<li class="step <?php echo "get_new_user" == $step ? "active" : ""; ?>">Register your new user</li>
-		<li class="step <?php echo "validate-user-signup" == $step ? "active" : ""; ?>">Register your new site</li>
-		<li class="step <?php echo "validate-blog-signup" == $step ? "active" : ""; ?>">Check your mail and Enjoy</li>
+		<li class="step <?php echo "get_new_user" == $step ? "active" : ""; ?>"><?php _e("Register your user", $locale_slug); ?></li>
+		<li class="step <?php echo "validate-user-signup" == $step ? "active" : ""; ?>"><?php _e("Register your site", $locale_slug); ?></li>
+		<li class="step <?php echo "validate-blog-signup" == $step ? "active" : ""; ?>"><?php _e("Check your mail and enjoy!", $locale_slug); ?></li>
 <?php endif; ?>
 	</ol>
 </div>
 
+<!--
 <div class="debug">
 	<p><?= $step ?> || <?= $last_stage ?></p>
 	<p><?php echo $has_user_signup_errors ? "With user signup errors": ""; ?></p>
 	<p><?php echo $has_blog_signup_errors ? "With blog signup errors": ""; ?></p>
 </div>
+-->

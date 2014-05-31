@@ -242,8 +242,13 @@ class WPMUSignupSteps{
 	 * @since    1.0.0
 	 */
 	public function add_plugin_admin_menu() {
-		$this->plugin_screen_hook_suffix = add_plugins_page(__("wpmu-signup-steps - Administration", $this->plugin_slug),
-			__("wpmu-signup-steps", $this->plugin_slug), "read", $this->plugin_slug, array($this, "display_plugin_admin_page"));
+		$this->plugin_screen_hook_suffix = add_plugins_page(
+			__("WPMU Signup Steps - Administration", $this->plugin_slug),
+			__("WPMU Signup Steps", $this->plugin_slug),
+			"manage_network", // Because is only for WPMU 
+			$this->plugin_slug,
+			array($this, "display_plugin_admin_page")
+		);
 	}
 
 	/**
@@ -274,6 +279,7 @@ class WPMUSignupSteps{
 			"has_blog_signup_errors" => $this->blog_signup_has_errors,
 			"active_signup_type" => $active_signup,
 			"user_logged_in" => $user_logged_in,
+			"locale_slug" => $this->plugin-slug,
 			"last_stage" => $last_stage
 		));
 	}
