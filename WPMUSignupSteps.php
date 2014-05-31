@@ -25,7 +25,7 @@ class WPMUSignupSteps{
 	 *
 	 * @var     string
 	 */
-	protected $version = "1.0.0";
+	protected $version = "1.0.1";
 
 	/**
 	 * Unique identifier for your plugin.
@@ -56,6 +56,24 @@ class WPMUSignupSteps{
 	 * @var      string
 	 */
 	protected $plugin_screen_hook_suffix = null;
+	
+	/**
+	 * WP Error flag for user signup
+	 *
+	 * @since    1.0.1
+	 *
+	 * @var      boolean
+	 */
+	protected $user_signup_has_errors = false;
+
+	/**
+	 * WP Error flag for blog signup
+	 *
+	 * @since    1.0.1
+	 *
+	 * @var      string
+	 */
+	protected $blog_signup_has_errors = false;
 
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
@@ -78,15 +96,16 @@ class WPMUSignupSteps{
 		add_action("signup_header", array($this, "enqueue_signup_styles_and_scritps"));
 		
 		// Before any signup form (new user, new blog, another blog).
-		add_action("before_signup_form", array($this, "action_render_steps_markup"));
+		add_action("before_signup_form", array($this, "action_render_steps_markup"), 12);
 		
 		// -- User registration
-		add_action("signup_extra_fields", array($this, "action_add_fields_user_signup_form"));
+		add_action("signup_extra_fields", array($this, "action_check_user_signup_errors"));
+		add_action("signup_extra_fields", array($this, "action_add_fields_user_signup_form"), 11);
 		// 'signup_hidden_fields',  'validate-user' // New user
 		
 		// -- Blog registration		
 		// After blog signup form 
-		add_action("signup_blogform", array($this, "action_before_register_new_blog_form"));
+		add_action("signup_blogform", array($this, "action_check_blog_signup_errors"));
 		// 'signup_hidden_fields', 'create-another-site' // Returning user
 		
 		// Before any signup (server side) and default stage // new user, new blog o another blog
@@ -103,7 +122,7 @@ class WPMUSignupSteps{
 		// "default" before any registration (server side)
 		
 		// After any signup (new user, new blog, another blog) form and before wp_footer
-		add_action("after_signup_form", array($this, "action_before_register_new_blog_form"));
+		add_action("after_signup_form", array($this, "action_append_after_forms"));
 		
 		// add_filter("TODO", array($this, "filter_method_name"));
 
@@ -207,7 +226,7 @@ class WPMUSignupSteps{
 	/**
 	 * Register and enqueue public-facing style sheet.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0.1
 	 */
 	public function enqueue_signup_styles_and_scritps() {
 		wp_enqueue_style($this->plugin_slug . "-plugin-styles", plugins_url("css/public.css", __FILE__), array(),
@@ -251,33 +270,44 @@ class WPMUSignupSteps{
 		$active_signup = apply_filters( 'wpmu_active_signup', $active_signup ); // wp-signup:658
 		
 		$viewMan->render("signup-steps.tpl.php", array(
+			"has_user_signup_errors" => $this->user_signup_has_errors,
+			"has_blog_signup_errors" => $this->blog_signup_has_errors,
 			"active_signup_type" => $active_signup,
 			"user_logged_in" => $user_logged_in,
 			"last_stage" => $last_stage
 		));
 	}
 	
-	public function action_before_register_new_blog_form(){
-		// Before the blog registration
-		// First step for existing users (returning users as internal doc says wp-signup.php:219 / WP 3.9.1)
-		// Second step for new users
+	/**
+	 * Check for user signup errors, to go one step back
+	 * 
+	 * @since			1.0.1
+	 *
+	 * @param			$error	WP_error object
+	 */
+	public function action_check_user_signup_errors($errors = ''){
+		$this->user_signup_has_errors = is_wp_error($errors) && sizeof($errors->errors) > 0;
+	}
+	
+	/**
+	 * Check for blog signup errors, to go one step back
+	 * 
+	 * @since			1.0.1
+	 *
+	 * @param			$error	WP_error object
+	 */
+	public function action_check_blog_signup_errors($errors = ''){
+		$this->blog_signup_has_errors = is_wp_error($errors) && sizeof($errors->errors) > 0;
+	}
+	
+	public function action_append_after_forms() {
+		echo $this->user_signup_has_errors ? "With user signup errors": "";
+		
+		echo $this->blog_signup_has_errors ? "With blog signup errors": "";
 	}
 	
 	public function action_add_fields_user_signup_form() {
 		// Add extra fields to the user signup (new users)
 	}
-
-	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        WordPress Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Filter Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// TODO: Define your filter hook callback here
-	}
-
+	
 }

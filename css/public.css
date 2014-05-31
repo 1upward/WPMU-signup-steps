@@ -1,0 +1,64 @@
+#wp-signup-steps {
+	margin: 0 auto 10px;
+	width: 90%; /* The same width as div.mu_register */ 
+	font-size: 14px;
+}
+
+#wp-signup-steps .step {
+	display: inline-block;
+	position: relative;
+	padding: 20px 10px;
+	margin-right: 20px;
+	background-color: #B5DEE2;
+	color: #FFF;
+	-webkit-transition: all 0.7s ease-in-out 1.5s;
+		 -moz-transition: all 0.7s ease-in-out 1.5s;
+			-ms-transition: all 0.7s ease-in-out 1.5s;
+					transition: all 0.7s ease-in-out 1.5s;
+}
+
+#wp-signup-steps .step.active {
+	background-color: #7EBFC5;
+}
+
+#wp-signup-steps .step:nth-child(1) {
+	padding-left: 16px;
+}
+
+#wp-signup-steps .step:nth-child(1):before {
+	display: none;
+}
+
+#wp-signup-steps .step:before, #wp-signup-steps .step:after {
+	content: "";
+	display: block;
+	position: absolute;
+	padding: 0;
+	width: 0;
+	height: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#wp-signup-steps .step:before {
+	border-top: 27px solid #B5DEE2;
+	border-bottom: 27px solid #B5DEE2;
+	border-left: 15px solid transparent;
+	left: -15px;	
+}
+
+#wp-signup-steps .step.active:before {
+	border-top: 27px solid #7EBFC5;
+	border-bottom: 27px solid #7EBFC5;
+}
+
+#wp-signup-steps .step:after {
+	border-top: 26px solid transparent;
+	border-bottom: 26px solid transparent;
+	border-left: 15px solid #B5DEE2;
+	right: -15px;
+}
+
+#wp-signup-steps .step.active:after {
+	border-left: 15px solid #7EBFC5;
+}

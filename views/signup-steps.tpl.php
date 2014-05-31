@@ -13,26 +13,29 @@ if("default" == $last_stage){
 	
 }
 // get_another_site > gimmeanotherblog validation
-// get_new_user > 
-// > validate-user-signup > error: get_new_user
-//												> success: suscribe site
+// get_new_user 					> success: 	validate-user-signup (suscribe site)
+//												> error: 		validate-user-signup (get_new_user)
+// > validate-user-signup > success: 	validate-user-signup (suscribe site)
+//												> error: 		validate-user-signup (get_new_user)
 // > validate-blog-signup > success : link validation email
-// 												> error : suscribe site
+// 												> error : 	validate-blog-signup
 ?>
 
 <div id="wp-signup-steps">
 	<ol>
 <?php if ("get_another_site" == $step || "gimmeanotherblog" == $step): ?>
-		<li class="<?php echo "get_another_site" == $step ? "active" : ""; ?>">Get another site</li>
-		<li class="<?php echo "gimmeanotherblog" == $step ? "active" : ""; ?>">Enjoy</li>
+		<li class="step <?php echo "get_another_site" == $step ? "active" : ""; ?>">Get another site</li>
+		<li class="step <?php echo "gimmeanotherblog" == $step ? "active" : ""; ?>">Enjoy</li>
 <?php else: ?>
-		<li class="<?php echo "get_new_user" == $step ? "active" : ""; ?>">Register your new user</li>
-		<li class="<?php echo "validate-user-signup" == $step ? "active" : ""; ?>">Register your new site</li>
-		<li class="<?php echo "validate-blog-signup" == $step ? "active" : ""; ?>">Check your mail and Enjoy</li>
+		<li class="step <?php echo "get_new_user" == $step ? "active" : ""; ?>">Register your new user</li>
+		<li class="step <?php echo "validate-user-signup" == $step ? "active" : ""; ?>">Register your new site</li>
+		<li class="step <?php echo "validate-blog-signup" == $step ? "active" : ""; ?>">Check your mail and Enjoy</li>
 <?php endif; ?>
 	</ol>
 </div>
 
 <div class="debug">
-	<span><?= $step ?> || <?= $last_stage ?></span>
+	<p><?= $step ?> || <?= $last_stage ?></p>
+	<p><?php echo $has_user_signup_errors ? "With user signup errors": ""; ?></p>
+	<p><?php echo $has_blog_signup_errors ? "With blog signup errors": ""; ?></p>
 </div>
